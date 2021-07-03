@@ -13,10 +13,9 @@ nostoreapp = false
 appcmd = None
 Ver = 13.2.0-C'''
     return i
-def install(app):
+def install():
     try:
-        open("test.py","w")
-        urllib.request.urlretrieve("https://github.com/amania-Gostd/Gostd/raw/main/13.2.0-cfw.AUIF", "DOS.py")
+        urllib.request.urlretrieve("https://github.com/amania-Gostd/Crack/raw/main/13.2.0-cfw.AUIF", "DOS.py")
         s = open("config.ini","w")
         s.write(a)
         s.close()
@@ -36,9 +35,6 @@ if c == "i":
     d = input("Enter y to execute")
     if d == "y":
         print("CFW Installing to ZenOS")
-        urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/update.ini", "update.ini")
-        config = configparser.ConfigParser()
-        config.readfp(codecs.open("update.ini", "r", "utf8"))
         install("cfw")
     else:
         pass
