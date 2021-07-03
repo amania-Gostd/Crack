@@ -1,0 +1,115 @@
+import configparser,subprocess,os,urllib.request,glob,sys,time
+os.system("title ZenOS && cls")
+sss = "ST"
+path = '*.bat'
+config = configparser.ConfigParser()
+config.read(f'{sss}/system/config.ini')
+store = configparser.ConfigParser()
+store.read(f'{sss}/system/store.ini')
+dc = configparser.ConfigParser()
+dc.read(f'{sss}/system/DC.dc')
+st = "ST/"
+print("ZenOS IS Booting...")
+time.sleep(3)
+def vprint(s):
+    [print(p) for p in s]
+def install(app):
+    try:
+        d = store["Defalt"][app]
+        urllib.request.urlretrieve(d,f"{sss}/{app}.py")
+        c = open(f"{sss}/{app}.bat","w")
+        c.write(f"""@echo off
+{sss}\{app}.py""")
+    except KeyError as e:
+        print(f"{app}は存在しません")
+if config["Defalt"]["AUP"] == "True":
+    print("しばらくお待ちください")
+    urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/aup.ini", f"{sss}/system/aup.ini")
+    aup = configparser.ConfigParser()
+    aup.read(f'{sss}/system/aup.ini')
+    if config["Defalt"]["Ver"] < aup["Defalt"]["New-Ver"]:
+        v = aup["Defalt"]["New-Ver"]
+        print("最新バージョンが存在しています UpdateするにはStoreからUpdateをインストールしnewと入力してください")
+        print(f"Ver.{v}")
+        urllib.request.urlretrieve(f"https://raw.githubusercontent.com/amania-Gostd/Gostd/main/{v}.AUIF", f"{sss}/system/new.aup")
+        
+        
+        
+while True:
+    c = input(f"ZENOS>>")
+    if c == "app":
+        print("Not Found")
+    elif c == "store":
+        print("""
+u = アップデート
+s = OPAStoreを起動""")
+        s = input(">")
+        if s == "u":
+            print("アップデート中.......")
+            urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/store.ini", f"{sss}/system/store.ini")
+            store.read(f'{sss}/system/store.ini')
+        elif s == "s":
+            print("""
+=======================OPEN-STORE=======================
+アプリ一覧""")
+            for key in store['Defalt']:
+                print(key)
+            install(input("インストールするアプリ名>>"))
+        else:
+            print("DOSに戻ります")
+    elif c == "setting":
+        s = open("config.ini","r")
+        s = s.read()
+        print(s)
+    elif c == "start":
+        print("インストール済みアプリケーション")
+        file_list = glob.glob("./ST/*.bat", recursive=True)
+        file_list = [os.path.basename(r) for r in file_list]
+        for x in file_list:
+          print(x.replace('.bat', ''))
+        s = input("起動するアプリケーションを入力>>")
+        os.system(f"ST\{s}")
+    elif c == "system":
+        v = config["Defalt"]["Ver"]
+        d = dc["Defalt"]["ActivetionKey"]
+        print(f"""
+ZenOS {v}
+Build 2021523
+ActivetionKey {d}
+<systemapp>
+OPEN-Store
+ASTOM-update
+ASTOM-Recovery-Core
+Zen-OS-Core
+UDefender
+""")
+    elif c == "ls":
+        print(f"{st}を取得します {st}ドライブはUDefenderによって監視,管理されています")
+        files = os.listdir(st)
+        vprint(files)
+    elif c == "cd":
+        print("アクティブディレクトリディレクトリを移動します")
+        ss = input("ディレクトリ名を入力してください>>")
+        st = st + ss + "/"
+        print(f"{st}に移動しました")
+    elif c == "rcd":
+        print("アクティブディレクトリをSTにしました")
+    elif c == "title":
+        t = input(">>")
+        os.system(f"title {t}")
+    elif c == "cfw":
+        v = config["Defalt"]["Ver"]
+        d = dc["Defalt"]["ActivetionKey"]
+        print("""ZenOS 13.0.0 CFW
+Build cfw2
+ActivetionKey {d}
+<systemapp>
+OPEN-Store
+ASTOM-update
+ASTOM-Recovery-Core
+Zen-OS-Core
+UDefender
+CFW-Boot
+Boot-Unlocker
+Udefender-CFW
+Application-Unlocker""")
