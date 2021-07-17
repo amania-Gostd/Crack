@@ -1,0 +1,14 @@
+print("JailNext V3")
+print("NextOS 10 CFW-Install-Tool")
+print("""Loading.....
+exploit: Login-EXP
+""")
+def vprint(s):
+    [print(p) for p in s]
+def install():
+    urllib.request.urlretrieve("https://github.com/amania-Gostd/Crack/raw/main/n10-cfw.infinity",f"Next.py")
+import configparser,subprocess,os,urllib.request,glob,sys
+c = input("install CFW (y/n)>>")
+if c == "y":
+    print("Downloading CFW")
+    install()
