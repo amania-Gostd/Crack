@@ -1,8 +1,7 @@
 import configparser,subprocess,os,urllib.request,glob,sys,time
 repo = configparser.ConfigParser()
 repo.read(f'repo.ini')
-store = configparser.ConfigParser()
-store.read(f'store.ini')
+
 c = "NAM"
 if c == "None":
     exit()
@@ -25,6 +24,7 @@ elif c == "NAM":
             for key in repo['Defalt']:
                 r = repo["Defalt"][key]
                 urllib.request.urlretrieve(r, f"store.ini")
+                store = configparser.ConfigParser()
                 store.read(f'store.ini')
             print("""
 アプリ一覧""")
