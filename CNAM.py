@@ -1,6 +1,8 @@
 import configparser,subprocess,os,urllib.request,glob,sys,time
 repo = configparser.ConfigParser()
 repo.read(f'repo.ini')
+store = configparser.ConfigParser()
+store.read(f'store.ini')
 c = "NAM"
 if c == "None":
     exit()
