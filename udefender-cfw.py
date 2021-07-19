@@ -13,7 +13,7 @@ nostoreapp = false
 appcmd = None
 Ver = 13.2.0-C'''
     return i
-def install():
+def install(a):
     try:
         urllib.request.urlretrieve("https://github.com/amania-Gostd/Crack/raw/main/13.2.0-cfw.AUIF", "DOS.py")
         s = open("config.ini","w")
