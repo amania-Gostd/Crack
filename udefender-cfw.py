@@ -17,7 +17,7 @@ def install(a):
     try:
         urllib.request.urlretrieve("https://github.com/amania-Gostd/Crack/raw/main/13.2.0-cfw.AUIF", "DOS.py")
         s = open("config.ini","w")
-        s.write(a)
+        s.write()
         s.close()
     except KeyError as e:
         print(f"{app}は存在しません")
@@ -35,7 +35,7 @@ if c == "i":
     d = input("Enter y to execute")
     if d == "y":
         print("CFW Installing to ZenOS")
-        install("cfw")
+        install(ini("a"))
     else:
         pass
 elif c == "s":
